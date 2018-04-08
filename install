@@ -1,0 +1,18 @@
+#!/bin/bash
+
+case "$(uname -s)" in
+  Linux*)
+    directory="$HOME/.local/share/fonts"
+    ;;
+  Darwin*)
+    directory="$HOME/Library/Fonts"
+    ;;
+  *)
+    echo "unknown operating system" 1>&2
+    exit 1
+    ;;
+esac
+
+mkdir -p $directory
+
+find "$(dirname $0)" -type f -iname '*.ttf' -exec cp -vf {} $directory/ \;
